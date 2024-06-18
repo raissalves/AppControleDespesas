@@ -19,7 +19,6 @@ class TransacaoForm extends StatelessWidget {
     onSubmit(title, value);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -30,10 +29,16 @@ class TransacaoForm extends StatelessWidget {
           children: [
             TextField(
               controller: titleController,
-              decoration: const InputDecoration(labelText: 'Título'),
+              onSubmitted: (_) => _submitForm(),
+              decoration: const InputDecoration(
+                labelText: 'Título',
+              ),
             ),
             TextField(
               controller: valueController,
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
+              onSubmitted: (_) => _submitForm(),
               decoration: const InputDecoration(
                 labelText: 'Valor (R\$)',
               ),
