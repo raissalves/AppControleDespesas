@@ -26,7 +26,7 @@ class TransacaoLista extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Color.fromARGB(255, 63, 9, 171),
+                      color: Theme.of(context).primaryColor,
                       width: 2,
                     ),
                   ),
@@ -36,7 +36,7 @@ class TransacaoLista extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Color.fromARGB(255, 63, 9, 171),
+                      color: Colors.purple,
                     ),
                   ),
                 ),

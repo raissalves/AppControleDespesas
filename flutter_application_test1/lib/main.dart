@@ -2,16 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_test1/componentes/transacao_form.dart';
 import 'package:flutter_application_test1/componentes/transacao_lista.dart';
 import 'dart:math';
-
 import 'models/transaction.dart';
 
 main() => runApp(DespesasApp());
 
 class DespesasApp extends StatelessWidget {
-  const DespesasApp({Key? key}) : super(key: key);
+  DespesasApp({Key? key}) : super(key: key);
+  final ThemeData tema = ThemeData();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: MyHomePage());
+    return MaterialApp(
+      home: const MyHomePage(),
+      theme: tema.copyWith(
+        colorScheme: tema.colorScheme.copyWith(
+          primary: Colors.purple,
+          secondary: Colors.amber,
+        ),
+      ),
+    );
   }
 }
 
@@ -49,13 +58,15 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _transactions.add(newTransaction);
     });
+
+    Navigator.of(context).pop();
   }
 
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (_) {
-        return TransacaoForm(_addTransaction);
+        return TransactionForm(_addTransaction);
       },
     );
   }
