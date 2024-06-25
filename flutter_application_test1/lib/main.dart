@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     //verificar se existe um id
     if (newTransaction.id == null) {
-      _atualizarTransacao(newTransaction.id, title, valor, data);
+      _atualizarTransacao(newTransaction.id!, title, valor, data);
     } else {
       setState(() {
         _transactions.add(newTransaction);
@@ -100,6 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text(
           'Despesas Pessoais',
           style: TextStyle(
