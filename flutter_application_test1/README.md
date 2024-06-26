@@ -1,16 +1,15 @@
-# flutter_application_test1
+# App Controle de Despesas 
 
-A new Flutter project.
+## Descrição do Projeto
+O aplicativo de Controle de Despesas e Gastos é uma ferramenta criado com o propositos academicos desenvolvida em Flutter e Dart para ajudar os usuários a monitorar e gerenciar suas finanças pessoais. Com uma interface amigável e intuitiva, o aplicativo permite que os usuários registrem suas despesas diárias, categorizem os gastos e visualizem relatórios detalhados sobre suas finanças.
 
-## Getting Started
+## Tecnologias Utilizadas
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
+-Flutter: Framework para desenvolvimento de aplicativos multiplataforma (Android).
+-Dart: Linguagem de programação utilizada pelo Flutter.
 
-This project is a starting point for a Flutter application.
+## Licença
+Este projeto está licenciado sob a licença MIT - veja o arquivo LICENSE.md para mais detalhes.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Agradecimentos
+Agradecemos a todos que contribuíram para este projeto e à comunidade de código aberto por fornecer as ferramentas e recursos que tornaram isso possível.
