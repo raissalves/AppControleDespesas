@@ -14,11 +14,12 @@ class DespesasApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(),
+      home: const MyHomePage(),
       //tema do app para definir cores personalizadas do app e fontes
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        secondaryHeaderColor: Colors.amber,
+        primaryColor: Colors.blue,
+        primaryIconTheme: const IconThemeData(color: Colors.white),
+        secondaryHeaderColor: Color.fromARGB(255, 153, 187, 246),
         fontFamily: 'Quicksand',
         appBarTheme: const AppBarTheme(
           titleTextStyle: TextStyle(
@@ -100,22 +101,16 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
+        backgroundColor: Theme.of(context).primaryColorDark,
+        centerTitle: false,
         title: const Text(
           'Despesas Pessoais',
           style: TextStyle(
             fontFamily: 'QuickSand',
             fontSize: 20,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            color: Theme.of(context).errorColor,
-            onPressed: () => _openTransactionFormModal(context),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -129,6 +124,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
+        hoverColor: Theme.of(context).primaryColorLight,
+        backgroundColor: Theme.of(context).primaryColorDark,
         onPressed: () => _openTransactionFormModal(context),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

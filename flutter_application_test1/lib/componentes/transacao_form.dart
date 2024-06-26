@@ -87,7 +87,7 @@ class _TransactionFormState extends State<TransactionForm> {
                   child: const Text(
                     'Selecionar Data',
                     style: TextStyle(
-                      color: Colors.purple,
+                      color: Color.fromARGB(255, 6, 125, 243),
                       fontWeight: FontWeight.bold,
                     ),
                   ),
