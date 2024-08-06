@@ -1,11 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_test1/telas/tela_home.dart';
 import 'package:intl/intl.dart';
+import '../componentes/transacao_lista.dart';
+
+TransacaoLista lista = TransacaoLista();
 
 class TransactionForm extends StatefulWidget {
   final void Function(String, double, DateTime) onSubmit;
 
-  const TransactionForm(this.onSubmit, {Key? key}) : super(key: key);
+  const TransactionForm(this.onSubmit, {super.key});
 
   @override
   State<TransactionForm> createState() => _TransactionFormState();
@@ -15,18 +20,6 @@ class _TransactionFormState extends State<TransactionForm> {
   final _titleController = TextEditingController();
   final _valueController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
-
-  _submitForm() {
-    final title = _titleController.text;
-    final value = double.tryParse(_valueController.text) ?? 0.0;
-
-    // ignore: unnecessary_null_comparison
-    if (title.isEmpty || value <= 0 || _selectedDate == null) {
-      return;
-    }
-
-    widget.onSubmit(title, value, _selectedDate);
-  }
 
   _showDatePicker() {
     showDatePicker(
@@ -54,7 +47,6 @@ class _TransactionFormState extends State<TransactionForm> {
           children: [
             TextField(
               controller: _titleController,
-              onSubmitted: (_) => _submitForm(),
               decoration: const InputDecoration(
                 labelText: 'Título',
               ),
@@ -63,7 +55,6 @@ class _TransactionFormState extends State<TransactionForm> {
               controller: _valueController,
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitForm(),
               decoration: const InputDecoration(
                 labelText: 'Valor (R\$)',
               ),
@@ -107,9 +98,22 @@ class _TransactionFormState extends State<TransactionForm> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    onPressed: _submitForm,
+                    onPressed: () {
+                      FirebaseFirestore.instance
+                          .collection('transactions')
+                          .add({
+                        'title': _titleController.text,
+                        'value': double.tryParse(_valueController.text) ?? 0.0,
+                        'date': _selectedDate,
+                      });
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MyHomePage()),
+                      );
+                    },
                     child: Text(
-                      'Nova Transação',
+                      'Adicionar Transação',
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                       ),
@@ -124,3 +128,5 @@ class _TransactionFormState extends State<TransactionForm> {
     );
   }
 }
+
+class _TransacaoListaState {}

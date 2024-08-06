@@ -1,12 +1,43 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_test1/componentes/grafico_barra.dart';
 import 'package:intl/intl.dart';
-import '../models/transaction.dart';
+import '../models/transacao.dart';
 
-class Grafico extends StatelessWidget {
-  final List<Transaction> recentTransaction;
+class Grafico extends StatefulWidget {
+  @override
+  State<Grafico> createState() => _GraficoState();
+}
 
-  const Grafico(this.recentTransaction, {Key? key}) : super(key: key);
+class _GraficoState extends State<Grafico> {
+  final CollectionReference transactionsRef =
+      FirebaseFirestore.instance.collection('transactions');
+  List<Transacao> recentTransaction = [];
+
+  @override
+  void initState() {
+    super.initState();
+    buscarTransacoes();
+  }
+
+  buscarTransacoes() async {
+    try {
+      final snapshot = await transactionsRef.get();
+      setState(() {
+        recentTransaction = snapshot.docs.map((doc) {
+          final data = doc.data() as Map<String, dynamic>;
+          return Transacao(
+            id: doc.id,
+            title: data['title'],
+            value: data['value'],
+            date: (data['date'] as Timestamp).toDate(),
+          );
+        }).toList();
+      });
+    } catch (error) {
+      print('Erro ao buscar transações: $error');
+    }
+  }
 
   List<Map<String, Object>> get groupedTransactions {
     return List.generate(7, (index) {
@@ -26,8 +57,8 @@ class Grafico extends StatelessWidget {
         }
       }
 
-      print(DateFormat.E().format(weekDay)[0]);
-      print(totalSum);
+      //print(DateFormat.E().format(weekDay)[0]);
+      //print(totalSum);
 
       return {
         'day': DateFormat.E().format(weekDay)[0],
